@@ -370,3 +370,69 @@ LOGS: 2023/01/16 07:09:51 tournaments.go:46:
 LOGS: 2023/01/16 07:09:51 users.go:25: Некорректный ID
 LOGS: 2023/01/16 07:09:51 users.go:40: Некорректный ID
 LOGS: 2023/01/16 07:09:51 users.go:59: 
+LOGS: 2023/01/16 09:54:12 companies_teams.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 companies_teams.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 companies_teams.go:46: 
+LOGS: 2023/01/16 09:54:12 companies.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 companies.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 companies.go:46: 
+LOGS: 2023/01/16 09:54:12 companies_tournaments.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 companies_tournaments.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 companies_tournaments.go:46: 
+LOGS: 2023/01/16 09:54:12 match_perfomances.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 match_perfomances.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 match_perfomances.go:46: 
+LOGS: 2023/01/16 09:54:12 matches.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 matches.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 matches.go:46: 
+LOGS: 2023/01/16 09:54:12 players.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 players.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 players.go:46: 
+LOGS: 2023/01/16 09:54:12 teams_players.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 teams_players.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 teams_players.go:46: 
+LOGS: 2023/01/16 09:54:12 teams.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 teams.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 teams.go:46: 
+LOGS: 2023/01/16 09:54:12 tournaments_teams.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 tournaments_teams.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 tournaments_teams.go:46: 
+LOGS: 2023/01/16 09:54:12 tournaments.go:22: Некорректный ID
+LOGS: 2023/01/16 09:54:12 tournaments.go:32: Некорректный ID
+LOGS: 2023/01/16 09:54:12 tournaments.go:46: 
+LOGS: 2023/01/16 09:54:12 users.go:25: Некорректный ID
+LOGS: 2023/01/16 09:54:12 users.go:40: Некорректный ID
+LOGS: 2023/01/16 09:54:12 users.go:59: 
+LOGS: 2023/01/16 10:08:43 companies_teams.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 companies_teams.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 companies_teams.go:46: 
+LOGS: 2023/01/16 10:08:43 companies.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 companies.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 companies.go:46: 
+LOGS: 2023/01/16 10:08:43 companies_tournaments.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 companies_tournaments.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 companies_tournaments.go:46: 
+LOGS: 2023/01/16 10:08:43 match_perfomances.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 match_perfomances.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 match_perfomances.go:46: 
+LOGS: 2023/01/16 10:08:43 matches.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 matches.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 matches.go:46: 
+LOGS: 2023/01/16 10:08:43 players.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 players.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 players.go:46: 
+LOGS: 2023/01/16 10:08:43 teams_players.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 teams_players.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 teams_players.go:46: 
+LOGS: 2023/01/16 10:08:43 teams.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 teams.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 teams.go:46: 
+LOGS: 2023/01/16 10:08:43 tournaments_teams.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 tournaments_teams.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 tournaments_teams.go:46: 
+LOGS: 2023/01/16 10:08:43 tournaments.go:22: Некорректный ID
+LOGS: 2023/01/16 10:08:43 tournaments.go:32: Некорректный ID
+LOGS: 2023/01/16 10:08:43 tournaments.go:46: 
+LOGS: 2023/01/16 10:08:43 users.go:25: Некорректный ID
+LOGS: 2023/01/16 10:08:43 users.go:40: Некорректный ID
+LOGS: 2023/01/16 10:08:43 users.go:59: 
