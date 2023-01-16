@@ -131,7 +131,7 @@ jobs:
     - name: Test Integration
       run: make test-integration
     
-    test_e2e:
+  test_e2e:
     needs: [test_integration]
     runs-on: ubuntu-latest
     
