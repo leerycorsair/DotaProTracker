@@ -17,7 +17,7 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
-type CompanyControllerTestSuite struct {
+type CompanyControllerUnitTestSuite struct {
 	suite.Suite
 	C            controllers.CompanyController
 	valid_data   models.Company
@@ -26,7 +26,7 @@ type CompanyControllerTestSuite struct {
 	invalid_id   int
 }
 
-func (suite *CompanyControllerTestSuite) SetupSuite() {
+func (suite *CompanyControllerUnitTestSuite) SetupSuite() {
 	file, err := os.OpenFile("test_logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatal(err)
@@ -88,14 +88,14 @@ func (suite *CompanyControllerTestSuite) SetupSuite() {
 	suite.C = controllers.CompanyControllerBuilder{}.Build(&mockReps)
 }
 
-func (suite *CompanyControllerTestSuite) TearDownSuite() {
+func (suite *CompanyControllerUnitTestSuite) TearDownSuite() {
 }
 
-func TestCompanyControllerTestSuite(t *testing.T) {
-	suite.Run(t, new(CompanyControllerTestSuite))
+func TestCompanyControllerUnitTestSuite(t *testing.T) {
+	suite.Run(t, new(CompanyControllerUnitTestSuite))
 }
 
-func (suite *CompanyControllerTestSuite) TestCompanyController() {
+func (suite *CompanyControllerUnitTestSuite) TestCompanyControllerUnit() {
 	suite.Run("add_valid", func() {
 
 		err := suite.C.Add(suite.valid_data)

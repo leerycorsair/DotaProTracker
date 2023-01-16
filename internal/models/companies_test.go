@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestCompaniesModels(t *testing.T) {
+func TestCompaniesModelsUnit(t *testing.T) {
 	t.Run("correct", func(t *testing.T) {
 		test_struct := models.CompanyView{
 			Id:       "1",

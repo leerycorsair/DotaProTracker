@@ -17,7 +17,7 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
-type MatchControllerTestSuite struct {
+type MatchControllerUnitTestSuite struct {
 	suite.Suite
 	C            controllers.MatchController
 	valid_data   models.Match
@@ -26,7 +26,7 @@ type MatchControllerTestSuite struct {
 	invalid_id   int
 }
 
-func (suite *MatchControllerTestSuite) SetupSuite() {
+func (suite *MatchControllerUnitTestSuite) SetupSuite() {
 	file, err := os.OpenFile("test_logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatal(err)
@@ -88,14 +88,14 @@ func (suite *MatchControllerTestSuite) SetupSuite() {
 	suite.C = controllers.MatchControllerBuilder{}.Build(&mockReps)
 }
 
-func (suite *MatchControllerTestSuite) TearDownSuite() {
+func (suite *MatchControllerUnitTestSuite) TearDownSuite() {
 }
 
-func TestMatchControllerTestSuite(t *testing.T) {
-	suite.Run(t, new(MatchControllerTestSuite))
+func TestMatchControllerUnitTestSuite(t *testing.T) {
+	suite.Run(t, new(MatchControllerUnitTestSuite))
 }
 
-func (suite *MatchControllerTestSuite) TestMatchController() {
+func (suite *MatchControllerUnitTestSuite) TestMatchControllerUnit() {
 	suite.Run("add_valid", func() {
 
 		err := suite.C.Add(suite.valid_data)

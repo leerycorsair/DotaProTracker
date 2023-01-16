@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestTeamsPlayersModels(t *testing.T) {
+func TestTeamsPlayersModelsUnit(t *testing.T) {
 	t.Run("correct", func(t *testing.T) {
 		test_struct := models.TeamPlayerView{
 			Id:           "1",

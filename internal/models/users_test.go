@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestUsersModels(t *testing.T) {
+func TestUsersModelsUnit(t *testing.T) {
 	t.Run("correct", func(t *testing.T) {
 		test_struct := models.UserView{
 			Id:             "1",

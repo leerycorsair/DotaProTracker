@@ -17,7 +17,7 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
-type TournamentTeamControllerTestSuite struct {
+type TournamentTeamControllerUnitTestSuite struct {
 	suite.Suite
 	C            controllers.TournamentTeamController
 	valid_data   models.TournamentTeam
@@ -26,7 +26,7 @@ type TournamentTeamControllerTestSuite struct {
 	invalid_id   int
 }
 
-func (suite *TournamentTeamControllerTestSuite) SetupSuite() {
+func (suite *TournamentTeamControllerUnitTestSuite) SetupSuite() {
 	file, err := os.OpenFile("test_logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatal(err)
@@ -86,14 +86,14 @@ func (suite *TournamentTeamControllerTestSuite) SetupSuite() {
 	suite.C = controllers.TournamentTeamControllerBuilder{}.Build(&mockReps)
 }
 
-func (suite *TournamentTeamControllerTestSuite) TearDownSuite() {
+func (suite *TournamentTeamControllerUnitTestSuite) TearDownSuite() {
 }
 
-func TestTournamentTeamControllerTestSuite(t *testing.T) {
-	suite.Run(t, new(TournamentTeamControllerTestSuite))
+func TestTournamentTeamControllerUnitTestSuite(t *testing.T) {
+	suite.Run(t, new(TournamentTeamControllerUnitTestSuite))
 }
 
-func (suite *TournamentTeamControllerTestSuite) TestTournamentTeamController() {
+func (suite *TournamentTeamControllerUnitTestSuite) TestTournamentTeamControllerUnit() {
 	suite.Run("add_valid", func() {
 
 		err := suite.C.Add(suite.valid_data)

@@ -9,13 +9,13 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
-type TeamsRepTestSuite struct {
+type TeamsRepUnitTestSuite struct {
 	suite.Suite
 	db    *sql.DB
 	pgRep postgres.Repositories
 }
 
-func (suite *TeamsRepTestSuite) SetupSuite() {
+func (suite *TeamsRepUnitTestSuite) SetupSuite() {
 	suite.db, _ = postgres.NewDB(postgres.TEST)
 
 	if err := suite.db.Ping(); err != nil {
@@ -36,15 +36,15 @@ func (suite *TeamsRepTestSuite) SetupSuite() {
 		&postgres.UserRepository{DB: suite.db})
 }
 
-func (suite *TeamsRepTestSuite) TearDownSuite() {
+func (suite *TeamsRepUnitTestSuite) TearDownSuite() {
 	defer suite.db.Close()
 }
 
-func TestTeamsRepTestSuite(t *testing.T) {
-	suite.Run(t, new(TeamsRepTestSuite))
+func TestTeamsRepUnitTestSuite(t *testing.T) {
+	suite.Run(t, new(TeamsRepUnitTestSuite))
 }
 
-func (suite *TeamsRepTestSuite) TestTeamsRep() {
+func (suite *TeamsRepUnitTestSuite) TestTeamsRep() {
 	suite.Run("find_by_id", func() {
 		obj, err := suite.pgRep.TeamRep().FindById(1)
 		suite.NoError(err)

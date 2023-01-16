@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMatchPerfomancesModels(t *testing.T) {
+func TestMatchPerfomancesModelsUnit(t *testing.T) {
 	t.Run("correct", func(t *testing.T) {
 		test_struct := models.MatchPerfomanceView{
 			Id:       "1",

@@ -9,13 +9,13 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
-type MatchPerfomancesRepTestSuite struct {
+type MatchPerfomancesRepUnitTestSuite struct {
 	suite.Suite
 	db    *sql.DB
 	pgRep postgres.Repositories
 }
 
-func (suite *MatchPerfomancesRepTestSuite) SetupSuite() {
+func (suite *MatchPerfomancesRepUnitTestSuite) SetupSuite() {
 	suite.db, _ = postgres.NewDB(postgres.TEST)
 
 	if err := suite.db.Ping(); err != nil {
@@ -36,15 +36,15 @@ func (suite *MatchPerfomancesRepTestSuite) SetupSuite() {
 		&postgres.UserRepository{DB: suite.db})
 }
 
-func (suite *MatchPerfomancesRepTestSuite) TearDownSuite() {
+func (suite *MatchPerfomancesRepUnitTestSuite) TearDownSuite() {
 	defer suite.db.Close()
 }
 
-func TestMatchPerfomancesRepTestSuite(t *testing.T) {
-	suite.Run(t, new(MatchPerfomancesRepTestSuite))
+func TestMatchPerfomancesRepUnitTestSuite(t *testing.T) {
+	suite.Run(t, new(MatchPerfomancesRepUnitTestSuite))
 }
 
-func (suite *MatchPerfomancesRepTestSuite) TestMatchPerfomancesRep() {
+func (suite *MatchPerfomancesRepUnitTestSuite) TestMatchPerfomancesRepUnit() {
 	suite.Run("find_by_id", func() {
 		obj, err := suite.pgRep.MatchPerfomanceRep().FindById(1)
 		suite.NoError(err)

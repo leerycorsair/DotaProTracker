@@ -9,7 +9,7 @@ test-report:
 	go test -json ./... | go-test-report
 
 test-unit:
-	go test -v -short -coverprofile=coverage.out ./...
+	go test -v -run Unit -coverprofile=coverage.out ./...
 	go tool cover -html=coverage.out
 
 test-integration:

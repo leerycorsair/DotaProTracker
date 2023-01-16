@@ -8,6 +8,6 @@ const MODERATOR string = "host=localhost port=5432 user=moderator password=moder
 
 const ADMINISTRATOR string = "host=localhost port=5432 user=administrator password=administrator dbname=dotaprotracker sslmode=disable"
 
-const TEST string = "host=localhost port=5432 user=postgres password=admin dbname=dotaprotracker_test sslmode=disable"
+const TEST string = "host=localhost port=5432 user=postgres password=postgres dbname=dotaprotracker_test sslmode=disable"
 
 var CONNECTIONS_POOL [3]string = [3]string{DEFAULT_USER, MODERATOR, ADMINISTRATOR}
