@@ -7,17 +7,58 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: windows-latest
+#   build:
+#     runs-on: ubuntu-latest
+    
+#     steps: 
+#     - name: Setup Actions
+#       uses: actions/checkout@v2
 
-    steps:
-    - name: Setup actions
+#     - name: Setup Go
+#       uses: actions/setup-go@v2
+#       with:
+#         go-version: '1.17.1'
+    
+#     - name: Run build
+#       run: make build
+      
+  test_unit:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps: 
+    - name: Setup Actions
       uses: actions/checkout@v2
 
     - name: Setup Go
       uses: actions/setup-go@v2
       with:
         go-version: '1.17.1'
+        
+    - name: Get Dependencies
+      run: |
+        go get -v -t -d ./...
+        if [ -f Gopkg.toml ]; then
+            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            dep ensure
+        fi
+
+    - name: Run Migrations
+      run: |
+        psql -f sql/create.sql postgresql://postgres:postgres@localhost:5432/postgres
+        psql -f sql/constraints.sql postgresql://postgres:postgres@localhost:5432/postgres
+        psql -f sql/triggers.sql postgresql://postgres:postgres@localhost:5432/postgres
+        psql -f sql/roles.sql postgresql://postgres:postgres@localhost:5432/postgres
     
-    - name: Run build
-      run: make build
+    - name: Test Unit
+      run: make test-unit
