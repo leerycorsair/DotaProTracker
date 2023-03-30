@@ -5,9 +5,13 @@
 *.so
 *.dylib
 
+# IDE
+.vscode
+
 # Test binary, built with `go test -c`
 test_report.html
 test_logs.txt
+logs.txt
 *.test
 
 # Output of the go coverage tool, specifically when used with LiteIDE
