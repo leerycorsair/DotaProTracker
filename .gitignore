@@ -10,7 +10,7 @@
 
 # Test binary
 test_report.html
-/test_logs.txt
+test_logs.txt
 *logs.txt
 *.test
 
