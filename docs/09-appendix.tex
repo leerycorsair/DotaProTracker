@@ -1,0 +1,449 @@
+\begin{appendices}
+\chapter{Создание базы данных}
+
+Далее в листингах А.1--А.3 приведен сценарий создания базы данных.
+
+\begin{lstlisting}[caption={Сценарий создания базы данных (часть 1)}]
+	drop table if exists players cascade;
+	drop table if exists teams cascade;
+	drop table if exists tournaments cascade;
+	drop table if exists companies cascade;
+	drop table if exists teams_players cascade;
+	drop table if exists companies_teams cascade;
+	drop table if exists companies_tournaments cascade;
+	drop table if exists tournaments_teams cascade;
+	drop table if exists matches cascade;
+	drop table if exists match_perfomances cascade;
+	drop table if exists users cascade;
+	
+	create table "players" (
+	"id" serial,
+	"nickname" varchar,
+	"realname" varchar,
+	"birthdate" date,
+	"country" varchar,
+	"mmr" int,
+	"role" varchar,
+	"signature_hero" varchar
+	);
+	
+	create table "teams" (
+	"id" serial,
+	"name" varchar,
+	"created_at" date,
+	"email" varchar,
+	"total_earnings" int,
+	"region" varchar,
+	"tier" int
+	);
+\end{lstlisting}
+\clearpage
+
+\begin{lstlisting}[caption={Сценарий создания базы данных (часть 2)}]
+	create table "tournaments" (
+	"id" serial,
+	"name" varchar,
+	"tier" int,
+	"prize_pool" int,
+	"date_start" date,
+	"duration" int,
+	"dpc_points" int,
+	"location" varchar
+	);
+	create table "companies" (
+	"id" serial,
+	"name" varchar,
+	"country" varchar,
+	"website" varchar,
+	"revenue" int,
+	"industry" varchar
+	);
+	create table "teams_players" (
+	"id" serial,
+	"team_id" int,
+	"player_id" int,
+	"contract_date" date,
+	"contract_time" int
+	);
+	create table "companies_tournaments" (
+	"id" serial,
+	"company_id" int,
+	"tournament_id" int,
+	"deposit" int
+	);
+	create table "companies_teams" (
+	"id" serial,
+	"company_id" int,
+	"team_id" int,
+	"contract_date" date,
+	"contract_time" int
+	);
+\end{lstlisting}
+\clearpage
+
+\begin{lstlisting}[caption={Сценарий создания базы данных (часть 3)}]
+	create table "tournaments_teams" (
+	"id" serial,
+	"tournament_id" int,
+	"team_id" int,
+	"participation_type" varchar,
+	"is_winner" boolean
+	);
+	create table "matches" (
+	"id" serial,
+	"tournament_id" int,
+	"r_team_id" int,
+	"d_team_id" int,
+	"duration" int, 
+	"winner" boolean
+	);
+	create table "users" (
+	"id" serial,
+	"name" varchar,
+	"birthdate" date,
+	"login" varchar, 
+	"password" varchar,
+	"email" varchar, 
+	"privilege_level" int
+	);
+	create table "match_perfomances" (
+	"id" serial,
+	"match_id" int,
+	"player_id" int, 
+	"team" boolean,
+	"hero" varchar,
+	"kills" int,
+	"deaths" int,
+	"assists" int,
+	"networth" int,
+	"gpm" int,
+	"xpm" int,
+	"dmg" int,
+	"heal" int,
+	"bld" int
+	);
+\end{lstlisting}
+\clearpage
+
+\chapter{Ограничения в базе данных}
+
+Далее в листингах Б.1--Б.4 приведен сценарий создания ограничений в базе данных. 
+
+\begin{lstlisting}[caption={Сценарий создания ограничений в базе данных (часть 1)}]
+	alter table "players" add constraint "players_id" primary key ("id"); 
+	alter table "teams" add constraint "teams_id" primary key ("id");
+	alter table "tournaments" add constraint "tournaments_id" primary key ("id");
+	alter table "companies" add constraint "companies_id" primary key ("id");
+	alter table "teams_players" add constraint "teams_players_id" primary key ("id");
+	alter table "companies_tournaments" add constraint "companies_tournaments_id" primary key ("id");
+	alter table "companies_teams" add constraint "companies_teams_id" primary key ("id");
+	alter table "tournaments_teams" add constraint "tournaments_teams_id" primary key ("id");
+	alter table "matches" add constraint "matches_id" primary key ("id");
+	alter table "users" add constraint "users_id" primary key ("id");
+	alter table "match_perfomances" add constraint "matches_perfomances_id" primary key ("id");
+	alter table "teams_players" add foreign key ("team_id") references "teams" ("id") on delete cascade;
+	alter table "teams_players" add foreign key ("player_id") references "players" ("id") on delete cascade;
+	alter table "companies_tournaments" add foreign key ("company_id") references "companies" ("id") on delete cascade;
+	alter table "companies_tournaments" add foreign key ("tournament_id") references "tournaments" ("id") on delete cascade;
+	alter table "companies_teams" add foreign key ("company_id") references "companies" ("id") on delete cascade;
+	alter table "companies_teams" add foreign key ("team_id") references "teams" ("id") on delete cascade;
+	alter table "tournaments_teams" add foreign key ("tournament_id") references "tournaments" ("id") on delete cascade;
+	alter table "tournaments_teams" add foreign key ("team_id") references "teams" ("id") on delete cascade;
+	alter table "matches" add foreign key ("tournament_id") references "tournaments" ("id") on delete cascade;
+	alter table "matches" add foreign key ("r_team_id") references "teams" ("id") on delete cascade;
+	alter table "matches" add foreign key ("d_team_id") references "teams" ("id") on delete cascade;
+\end{lstlisting}
+
+\clearpage
+
+\begin{lstlisting}[caption={Сценарий создания ограничений в базе данных (часть 2)}]
+	alter table "match_perfomances" add foreign key ("match_id") references "matches" ("id") on delete cascade;
+	alter table "match_perfomances" add foreign key ("player_id") references "players" ("id") on delete cascade;
+	
+	alter table "players" alter column "nickname" set not null;
+	alter table "players" alter column "realname" set not null;
+	alter table "players" alter column "birthdate" set not null;
+	alter table "players" alter column "country" set not null;
+	alter table "players" alter column "mmr" set not null;
+	alter table "players" alter column "role" set not null;
+	alter table "players" alter column "signature_hero" set not null;
+	alter table "players" add constraint "players_mmr_check" check (mmr > 0);
+	
+	alter table "teams" alter column "name" set not null;
+	alter table "teams" alter column "created_at" set not null;
+	alter table "teams" alter column "email" set not null;
+	alter table "teams" alter column "total_earnings" set not null;
+	alter table "teams" alter column "region" set not null;
+	alter table "teams" alter column "tier" set not null;
+	alter table "teams" add constraint "teams_total_earnings_check" check (total_earnings > 0);
+	alter table "teams" add constraint "teams_tier_check" check (tier > 0 and tier < 5);
+	
+	alter table "tournaments" alter column "name" set not null;
+	alter table "tournaments" alter column "tier" set not null;
+	alter table "tournaments" alter column "prize_pool" set not null;
+	alter table "tournaments" alter column "date_start" set not null;
+	alter table "tournaments" alter column "duration" set not null;
+	alter table "tournaments" alter column "dpc_points" set not null;
+	alter table "tournaments" alter column "location" set not null;
+	alter table "tournaments" add constraint "tournaments_tier_check" check (tier > 0 and tier < 5);
+	alter table "tournaments" add constraint "tournaments_prize_pool_check"check (prize_pool > 0);
+	alter table "tournaments" add constraint "tournaments_date_check" check (duration > 0);
+	alter table "tournaments" add constraint "tournaments_dpc_points_check"check (dpc_points >= 0);
+\end{lstlisting}
+
+\clearpage
+
+\begin{lstlisting}[caption={Сценарий создания ограничений в базе данных (часть 3)}]	
+	alter table "companies" alter column "name" set not null;
+	alter table "companies" alter column "country" set not null;
+	alter table "companies" alter column "website" set not null;
+	alter table "companies" alter column "revenue" set not null;
+	alter table "companies" alter column "industry" set not null;
+	alter table "companies" add constraint "companies_revenue" check (revenue > 0);
+	
+	alter table "teams_players" alter column "team_id" set not null;
+	alter table "teams_players" alter column "player_id" set not null;
+	alter table "teams_players" alter column "contract_date" set not null;
+	alter table "teams_players" alter column "contract_time" set not null;
+	alter table "teams_players" add constraint "teams_players_contract_time_check" check (contract_time > 0 and contract_time <= 36);
+	
+	alter table "companies_tournaments" alter column "company_id" set not null;
+	alter table "companies_tournaments" alter column "tournament_id" set not null;
+	alter table "companies_tournaments" alter column "deposit" set not null;
+	alter table "companies_tournaments" add constraint "companies_tournaments_deposit_check" check (deposit > 0);
+	
+	alter table "companies_teams" alter column "company_id" set not null;
+	alter table "companies_teams" alter column "team_id" set not null;
+	alter table "companies_teams" alter column "contract_date" set not null;
+	alter table "companies_teams" alter column "contract_time" set not null;
+	alter table "companies_teams" add constraint "companies_teams_contract_time_check" check (contract_time > 0 and contract_time <= 36);
+	
+	alter table "tournaments_teams" alter column "tournament_id" set not null;
+	alter table "tournaments_teams" alter column "team_id" set not null;
+	alter table "tournaments_teams" alter column "participation_type" set not null;
+	alter table "tournaments_teams" alter column "is_winner" set not null;
+	alter table "tournaments_teams" add constraint "tournaments_teams_participation_type_check" check (participation_type in ('invite', 'qualification'));
+	
+\end{lstlisting}
+
+\clearpage
+
+\begin{lstlisting}[caption={Сценарий создания ограничений в базе данных (часть 4)}]
+	alter table "matches" alter column "tournament_id" set not null;
+	alter table "matches" alter column "r_team_id" set not null;
+	alter table "matches" alter column "d_team_id" set not null;
+	alter table "matches" alter column "duration" set not null;
+	alter table "matches" alter column "winner" set not null;
+	alter table "matches" alter column "matches_duration_check" check (duration > 0);
+	alter table "users" alter column "name" set not null;
+	alter table "users" alter column "birthdate" set not null;
+	alter table "users" alter column "login" set not null;
+	alter table "users" alter column "password" set not null;
+	alter table "users" alter column "email" set not null;
+	alter table "users" alter column "privilege_level" set not null;
+	alter table "users" add constraint "users_login" unique (login);
+	alter table "users" add constraint "users_lvl_check" check (privilege_level > 0 and privilege_level < 4);
+	alter table "match_perfomances" alter column "match_id" set not null;
+	alter table "match_perfomances" alter column "player_id" set not null;
+	alter table "match_perfomances" alter column "team" set not null;
+	alter table "match_perfomances" alter column "hero" set not null;
+	alter table "match_perfomances" alter column "kills" set not null;
+	alter table "match_perfomances" alter column "deaths" set not null;
+	alter table "match_perfomances" alter column "assists" set not null;
+	alter table "match_perfomances" alter column "networth" set not null;
+	alter table "match_perfomances" alter column "gpm" set not null;
+	alter table "match_perfomances" alter column "xpm" set not null;
+	alter table "match_perfomances" alter column "dmg" set not null;
+	alter table "match_perfomances" alter column "heal" set not null;
+	alter table "match_perfomances" alter column "bld" set not null;
+	alter table "match_perfomances" add constraint "match_perfomances_kills_check" check (kills >= 0);
+	alter table "match_perfomances" add constraint "match_perfomances_deaths_check" check (deaths >= 0);
+	alter table "match_perfomances" add constraint "match_perfomances_assists_check" check (assists >= 0);
+	alter table "match_perfomances" add constraint "match_perfomances_networth_check" check (networth > 0);
+	alter table "match_perfomances" add constraint "match_perfomances_gpm_check" check (gpm > 0);
+	alter table "match_perfomances" add constraint "match_perfomances_xpm_check" check (xpm > 0);
+	alter table "match_perfomances" add constraint "match_perfomances_dmg_check" check (dmg >= 0);
+	alter table "match_perfomances" add constraint "match_perfomances_heal_check" check (heal >= 0);
+	alter table "match_perfomances" add constraint "match_perfomances_bld_check" check (bld >= 0);
+\end{lstlisting}
+
+\chapter{Ролевая модель}
+
+Далее в листингах В.1--В.3 приведен сценарий создания ролевой модели в базе данных.
+
+\begin{lstlisting}[caption={Сценарий создания ролевой модели в базе данных (часть 1)}]
+	do
+	$do$
+	begin
+	if exists (
+	select from pg_catalog.pg_roles
+	where  rolname = 'initial_login') then
+	raise notice 'role "initial_login" already exists. skipping.';
+	else
+	create role initial_login with nosuperuser nocreatedb login password 'initial_login';
+	end if;
+	end
+	$do$;
+	do
+	$do$
+	begin
+	if exists (
+	select from pg_catalog.pg_roles
+	where  rolname = 'default_user') then
+	raise notice 'role "default_user" already exists. skipping.';
+	else
+	create role default_user with nosuperuser nocreatedb login password 'default_user';
+	end if;
+	end
+	$do$;
+	do
+	$do$
+	begin
+	if exists (
+	select from pg_catalog.pg_roles
+	where  rolname = 'moderator') then
+	raise notice 'role "moderator" already exists. skipping.';
+	else
+	create role moderator with nosuperuser nocreatedb login password 'moderator';
+	end if;
+	end
+	$do$;
+\end{lstlisting}
+
+\clearpage
+
+\begin{lstlisting}[caption={Сценарий создания ролевой модели в базе данных (часть 2)}]
+	do
+	$do$
+	begin
+	if exists (
+	select from pg_catalog.pg_roles
+	where  rolname = 'administrator') then
+	raise notice 'role "administrator" already exists. skipping.';
+	else
+	create role administrator with nosuperuser nocreatedb login password 'administrator';
+	end if;
+	end
+	$do$;
+	
+	grant select, insert on table users to initial_login;
+	grant usage, select on sequence users_id_seq to initial_login;
+	
+	grant select on table players to default_user;
+	grant select on table teams to default_user;
+	grant select on table tournaments to default_user;
+	grant select on table companies to default_user;
+	grant select on table teams_players to default_user;
+	grant select on table companies_teams to default_user;
+	grant select on table companies_tournaments to default_user;
+	grant select on table tournaments_teams to default_user;
+	grant select on table matches to default_user;
+	grant select on table match_perfomances to default_user;
+	
+	grant select, insert, delete, update on table players to moderator;
+	grant select, insert, delete, update on table teams to moderator;
+	grant select, insert, delete, update on table tournaments to moderator;
+	grant select, insert, delete, update on table companies to moderator;
+	grant select, insert, delete, update on table teams_players to moderator;
+	grant select, insert, delete, update on table companies_teams to moderator;
+	grant select, insert, delete, update on table companies_tournaments to moderator;
+	grant select, insert, delete, update on table tournaments_teams to moderator;
+	grant select, insert, delete, update on table matches to moderator;
+	grant select, insert, delete, update on table match_perfomances to moderator;
+\end{lstlisting}
+
+\clearpage
+
+\begin{lstlisting}[caption={Сценарий создания ролевой модели в базе данных (часть 3)}]
+	grant usage, select on sequence players_id_seq to moderator;
+	grant usage, select on sequence teams_id_seq to moderator;
+	grant usage, select on sequence tournaments_id_seq to moderator;
+	grant usage, select on sequence companies_id_seq to moderator;
+	grant usage, select on sequence teams_players_id_seq to moderator;
+	grant usage, select on sequence companies_teams_id_seq to moderator;
+	grant usage, select on sequence companies_tournaments_id_seq to moderator;
+	grant usage, select on sequence tournaments_teams_id_seq to moderator;
+	grant usage, select on sequence matches_id_seq to moderator;
+	grant usage, select on sequence match_perfomances_id_seq to moderator;
+	
+	grant select, insert, delete, update on table players to administrator;
+	grant select, insert, delete, update on table teams to administrator;
+	grant select, insert, delete, update on table tournaments to administrator;
+	grant select, insert, delete, update on table companies to administrator;
+	grant select, insert, delete, update on table teams_players to administrator;
+	grant select, insert, delete, update on table companies_teams to administrator;
+	grant select, insert, delete, update on table companies_tournaments to administrator;
+	grant select, insert, delete, update on table tournaments_teams to administrator;
+	grant select, insert, delete, update on table matches to administrator;
+	grant select, insert, delete, update on table match_perfomances to administrator;
+	grant select, insert, delete, update on table users to administrator;
+	
+	grant usage, select on sequence players_id_seq to administrator;
+	grant usage, select on sequence teams_id_seq to administrator;
+	grant usage, select on sequence tournaments_id_seq to administrator;
+	grant usage, select on sequence companies_id_seq to administrator;
+	grant usage, select on sequence teams_players_id_seq to administrator;
+	grant usage, select on sequence companies_teams_id_seq to administrator;
+	grant usage, select on sequence companies_tournaments_id_seq to administrator;
+	grant usage, select on sequence tournaments_teams_id_seq to administrator;
+	grant usage, select on sequence matches_id_seq to administrator;
+	grant usage, select on sequence match_perfomances_id_seq to administrator;
+	grant usage, select on sequence users_id_seq to administrator;
+\end{lstlisting}
+
+	\chapter{Триггеры}
+
+Далее в листингах Г.1--Г.2 приведен сценарий создания триггеров в базе данных.
+
+\begin{lstlisting}[caption={Сценарий создания триггеров в базе данных (часть 1)}]
+	create or replace function make_deposit()
+	returns trigger
+	as
+	$$
+	begin
+	update tournaments
+	set prize_pool = prize_pool + new.deposit 
+	where id = new.tournament_id;
+	return new;
+	end;
+	$$ 
+	language plpgsql;
+	
+	drop trigger if exists make_deposit_trigger on companies_tournaments;
+	create trigger make_deposit_trigger after insert on companies_tournaments
+	for row execute procedure make_deposit();
+\end{lstlisting}
+
+\clearpage
+
+\begin{lstlisting}[caption={Сценарий создания триггеров в базе данных (часть 2)}]
+	create or replace function make_win()
+	returns trigger
+	as
+	$$
+	declare
+	tmp int = 0;
+	begin
+	if (new.is_winner = true) then 
+	select into tmp prize_pool from tournaments_teams join tournaments
+	on tournaments.id = tournaments_teams.id
+	where tournaments.id = new.tournament_id;
+	
+	update teams
+	set total_earnings = total_earnings + tmp
+	where teams.id = new.team_id;
+	end if;
+	return new;
+	end;
+	$$ 
+	language plpgsql;
+	
+	drop trigger if exists make_win on tournaments_teams;
+	create trigger make_win after insert on tournaments_teams
+	for row execute procedure make_win();
+\end{lstlisting}
+
+\clearpage
+
+
+\end{appendices}
