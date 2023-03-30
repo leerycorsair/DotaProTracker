@@ -20,3 +20,7 @@ test_logs.txt
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
