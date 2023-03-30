@@ -8,7 +8,7 @@
 # IDE
 .vscode
 
-# Test binary, built with `go test -c`
+# Test binary
 test_report.html
 test_logs.txt
 logs.txt
